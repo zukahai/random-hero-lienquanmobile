@@ -52,7 +52,7 @@
     <meta property="og:url" content="https://lienquan.garena.vn" />
 
     <script type="text/javascript">
-        ga('send','event','Học Viện','pageLoad');
+        // ga('send','event','Học Viện','pageLoad');
     </script>
 
     <div id="fb-root"></div>
@@ -284,7 +284,7 @@ chosen link or button. -->
     }
 
 </style>
-<img src="https://lienquan.garena.vn/asset/images/rating-18.jpg" class="img_18" alt="">
+<!-- <img src="https://lienquan.garena.vn/asset/images/rating-18.jpg" class="img_18" alt=""> -->
 
     <section class="menu-m">
     <ul>
@@ -482,24 +482,58 @@ chosen link or button. -->
             </div>
             <script>
                 function randomImg(){
-                    // Lấy tất cả các phần tử <img> trong thẻ có lớp "listhero"
-                const imgElements = document.querySelectorAll('.listhero img');
+                    // Lấy tất cả các radio button có name="filter"
+                    const radioButtons = document.querySelectorAll('input[name="filter"]');
 
-            // Tạo một mảng để lưu trữ các đường dẫn (src) của các hình ảnh
-            const imageSrcArray = [];
+                    let selectedValue = 'allss';
+                    // Lặp qua từng radio button để thêm sự kiện lắng nghe khi có thay đổi
+                    radioButtons.forEach(radioButton => {
+                            // Kiểm tra xem radio button nào được chọn và lấy giá trị của nó
+                            if (radioButton.checked) {
+                                selectedValue = radioButton.value;
+                            }
+                    });
+                    console.log('Giá trị @@:', selectedValue);
 
-            // Lặp qua tất cả các phần tử <img> và lấy thuộc tính "src" của mỗi phần tử
-            imgElements.forEach(imgElement => {
-                const src = imgElement.getAttribute('src');
-                imageSrcArray.push(src);
-            });
+                    
+                    // Tạo mảng chứa các URL và data-type của từng li
+                    let championInfoArray = [];
 
-            // In kết quả ra console (bạn có thể xử lý dữ liệu theo nhu cầu của mình)
-            console.log(imageSrcArray);
-            // Cập nhật thuộc tính "src" của hình ảnh có id là "imgrd" với đường dẫn ngẫu nhiên
-            const imgElement = document.getElementById('imgrd');
-            let idrd = Math.floor(Math.random() * imageSrcArray.length);
-            imgElement.setAttribute('src', imageSrcArray[idrd]);
+                    // Lấy tất cả các phần tử li có class "list-champion"
+                    const listChampions = document.querySelectorAll('.list-champion');
+
+                    // Lặp qua từng phần tử li và lấy giá trị của thuộc tính href của thẻ a và thuộc tính data-type của thẻ p
+                    listChampions.forEach(listChampion => {
+                        // Lấy phần tử a bên trong li
+                        const anchorElement = listChampion.querySelector('img');
+
+                        // Lấy phần tử p bên trong li
+                        const paragraphElement = listChampion.querySelector('p');
+
+                        // Kiểm tra xem phần tử a và phần tử p có tồn tại và có thuộc tính href và data-type không
+                        if (anchorElement && anchorElement.hasAttribute('src') && paragraphElement && paragraphElement.hasAttribute('data-type')) {
+                            const urlValue = anchorElement.getAttribute('src');
+                            const dataTypeValue = paragraphElement.getAttribute('data-type');
+                            championInfoArray.push({ url: urlValue, dataType: dataTypeValue });
+                        }
+                    });
+
+                    // Hiển thị mảng chứa các URL và data-type trong console
+                    console.log('Mảng chứa các URL và data-type của từng li:', championInfoArray);
+
+                    if (selectedValue == 'all') {
+                        championInfoArray = championInfoArray;
+                    }
+                    else {
+                        championInfoArray = championInfoArray.filter(
+                            championInfo => championInfo.dataType == selectedValue
+                        )
+                    }
+                   const randomIndex = Math.floor(Math.random() * 1000000) % championInfoArray.length;
+                   document.getElementById('imgrd').src = championInfoArray[randomIndex].url
+
+
+                    
                 }
             </script>
             <div class="bxlisthero">
