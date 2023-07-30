@@ -127,6 +127,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         min-width: 200px;
     }
 
+    .random-img button:hover {
+        background-color: #01aa34;
+    }
+
+    .random-img h1 {
+        margin-bottom: 10px;
+    }
+
 </style>
 </head>
 <body class="wrapper_page ">
@@ -317,17 +325,6 @@ chosen link or button. -->
         <li><a href="#">Tài khoản</a></li>
         <!-- <li><a href="https://colienquan.garena.vn/">Cờ liên quân</a></li> -->
         <li><a href="#">Giftcode</a></li>
-        
-        
-
-        
-        
-        
-        
-
-        
-        
-
     </ul>
 </div>
             </nav>
@@ -481,6 +478,7 @@ chosen link or button. -->
                 </form>
             </div>
             <div class="random-img">
+                <h1 id="name-hero"></h1>
                 <img id="imgrd" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Orange_question_mark.svg" alt="">
                 <button onclick="randomImg()" class="btn">Random</button>
             </div>
@@ -497,7 +495,7 @@ chosen link or button. -->
                                 selectedValue = radioButton.value;
                             }
                     });
-                    console.log('Giá trị @@:', selectedValue);
+                    // console.log('Giá trị @@:', selectedValue);
 
                     
                     // Tạo mảng chứa các URL và data-type của từng li
@@ -518,12 +516,13 @@ chosen link or button. -->
                         if (anchorElement && anchorElement.hasAttribute('src') && paragraphElement && paragraphElement.hasAttribute('data-type')) {
                             const urlValue = anchorElement.getAttribute('src');
                             const dataTypeValue = paragraphElement.getAttribute('data-type');
-                            championInfoArray.push({ url: urlValue, dataType: dataTypeValue });
+                            const dataNameValue = paragraphElement.getAttribute('data-name');
+                            championInfoArray.push({ url: urlValue, dataType: dataTypeValue, name: dataNameValue });
                         }
                     });
 
                     // Hiển thị mảng chứa các URL và data-type trong console
-                    console.log('Mảng chứa các URL và data-type của từng li:', championInfoArray);
+                    // console.log('Mảng chứa các URL và data-type của từng li:', championInfoArray);
 
                     if (selectedValue == 'all') {
                         championInfoArray = championInfoArray;
@@ -535,9 +534,7 @@ chosen link or button. -->
                     }
                    const randomIndex = Math.floor(Math.random() * 1000000) % championInfoArray.length;
                    document.getElementById('imgrd').src = championInfoArray[randomIndex].url
-
-
-                    
+                   document.getElementById('name-hero').innerHTML = championInfoArray[randomIndex].name
                 }
             </script>
             <div class="bxlisthero">
