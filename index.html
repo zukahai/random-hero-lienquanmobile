@@ -480,9 +480,20 @@ chosen link or button. -->
             <div class="random-img">
                 <h1 id="name-hero"></h1>
                 <img id="imgrd" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Orange_question_mark.svg" alt="">
-                <button onclick="randomImg()" class="btn">Random</button>
+                <button onclick="Loop()" class="btn">Random</button>
             </div>
             <script>
+                function Loop(){
+                    let indexLoop = 0;
+                    let maxIndexLoop = 20;
+                    l =  setInterval(function(){
+                        indexLoop++;
+                        randomImg();
+                        if(indexLoop == maxIndexLoop){
+                            clearInterval(l);
+                        }
+                    }, 200);
+                }
                 function randomImg(){
                     // Lấy tất cả các radio button có name="filter"
                     const radioButtons = document.querySelectorAll('input[name="filter"]');
