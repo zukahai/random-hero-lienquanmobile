@@ -485,14 +485,15 @@ chosen link or button. -->
             <script>
                 function Loop(){
                     let indexLoop = 0;
-                    let maxIndexLoop = 20;
+                    let maxIndexLoop = 50;
+                    let delay = 100;
                     l =  setInterval(function(){
                         indexLoop++;
                         randomImg();
                         if(indexLoop == maxIndexLoop){
                             clearInterval(l);
                         }
-                    }, 200);
+                    }, delay);
                 }
                 function randomImg(){
                     // Lấy tất cả các radio button có name="filter"
